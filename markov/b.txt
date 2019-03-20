@@ -1,0 +1,1 @@
+I love to throw the {$ball} with the dog! When I throw with my {$orientation} hand, I try to follow through with extension. Sometimes I repeat with the {$non_orientation} hand. You never know when the {$ball} will take a big bounce, so I keep it low. It went {$direction}. Then {$dog} retrieved it at a gallop.
