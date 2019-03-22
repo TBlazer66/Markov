@@ -1,0 +1,1 @@
+I pick {$winners} to win in this round of the {$region}. Their cardinality is {$cardinality}. {$strongest_team} looks particularly likely to win, while {$weakest_team} the underdog.
