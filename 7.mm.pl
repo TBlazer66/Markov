@@ -167,14 +167,7 @@ sub play_game {
       my $denominator = $1 + $3;
       my $ratio       = $3 / $denominator;
       say "ratio was $ratio";
-      my $random_number = rand();
-      if ( $random_number < $ratio ) {
-        push @winners, "$1.$2";
-      }
-      else {
-        push @winners, "$3.$4";
-      }
-
+	  push @winners, rand() < $ratio ? "$1.$2" : "$3.$4"
     }
 
   }
