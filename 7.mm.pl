@@ -8,7 +8,7 @@ use Text::Template;
 use POSIX qw(strftime);
 binmode STDOUT, 'utf8';
 
-my ($sub_dir) = $ARGV[0];
+my ($sub_dir) = $ARGV[0] || 'out';
 say "sub_dir is $sub_dir";
 my $path1 = Path::Tiny->cwd;
 say "path1 is $path1";
@@ -61,14 +61,11 @@ while ( $trials > 0 ) {
     my %vars = map { $_->[0], $_->[ rand( $#{$_} ) + 1 ] } @{$data};
 
     # further stochastic output from "playing" the games
-    $vars{"winners"}=$string_sieger;
-    $vars{"cardinality"}=$anzahl;
-    $vars{"region"}=$r;
+	@vars{qw/winners cardinality region/} = ($string_sieger,$anzahl,$r);
 
     my $rvars = \%vars; #important 
 
-    my @pfade = $path2->children(qr/\.txt$/);
-    @pfade = sort @pfade;
+    my @pfade = sort $path2->children(qr/\.txt$/);
 
     #say "paths are @pfade";
 
@@ -80,8 +77,7 @@ while ( $trials > 0 ) {
         SOURCE   => $file,
       ) or die "Couldn't construct template: $!";
 
-      my $result = $template->fill_in( HASH => $rvars );
-      $out_file->append_utf8($result);
+	  $out_file->append_utf8($template->fill_in( HASH => $rvars));
     }
     say "-------system out---------";
     system("cat $out_file");
@@ -167,14 +163,7 @@ sub play_game {
       my $denominator = $1 + $3;
       my $ratio       = $3 / $denominator;
       say "ratio was $ratio";
-      my $random_number = rand();
-      if ( $random_number < $ratio ) {
-        push @winners, "$1.$2";
-      }
-      else {
-        push @winners, "$3.$4";
-      }
-
+	  push @winners, rand() < $ratio ? "$1.$2" : "$3.$4"
     }
 
   }
