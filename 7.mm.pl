@@ -61,9 +61,7 @@ while ( $trials > 0 ) {
     my %vars = map { $_->[0], $_->[ rand( $#{$_} ) + 1 ] } @{$data};
 
     # further stochastic output from "playing" the games
-    $vars{"winners"}=$string_sieger;
-    $vars{"cardinality"}=$anzahl;
-    $vars{"region"}=$r;
+	@vars{qw/winners cardinality region/} = ($string_sieger,$anzahl,$r);
 
     my $rvars = \%vars; #important 
 
