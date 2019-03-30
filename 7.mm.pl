@@ -8,7 +8,7 @@ use Text::Template;
 use POSIX qw(strftime);
 binmode STDOUT, 'utf8';
 
-my ($sub_dir) = $ARGV[0];
+my ($sub_dir) = $ARGV[0] || 'out';
 say "sub_dir is $sub_dir";
 my $path1 = Path::Tiny->cwd;
 say "path1 is $path1";
@@ -77,8 +77,7 @@ while ( $trials > 0 ) {
         SOURCE   => $file,
       ) or die "Couldn't construct template: $!";
 
-      my $result = $template->fill_in( HASH => $rvars );
-      $out_file->append_utf8($result);
+	  $out_file->append_utf8($template->fill_in( HASH => $rvars));
     }
     say "-------system out---------";
     system("cat $out_file");
