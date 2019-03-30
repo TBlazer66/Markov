@@ -65,8 +65,7 @@ while ( $trials > 0 ) {
 
     my $rvars = \%vars; #important 
 
-    my @pfade = $path2->children(qr/\.txt$/);
-    @pfade = sort @pfade;
+    my @pfade = sort $path2->children(qr/\.txt$/);
 
     #say "paths are @pfade";
 
